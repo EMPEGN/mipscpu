@@ -1,8 +1,8 @@
 `timescale 1ns / 1ns
-module extend16 #(parameter WIDTH = 16)(
-    input [WIDTH - 1:0] a,
+module extend16 (
+    input [15:0] a,
     input sext,             //1±íÊ¾ÓÐ·ûºÅ
     output [31:0] b
     );
-    assign b = sext ? {{(32 - WIDTH){a[WIDTH - 1]}},a} : {{(32 - WIDTH){1'b0}},a};
+    assign b = sext ? {{(16){a[15]}},a} : {{16{1'b0}},a};
 endmodule

@@ -1,0 +1,181 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 1991-2009 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 16 16 160 144)
+	(text "alu" (rect 5 0 19 12)(font "Arial" ))
+	(text "inst" (rect 8 112 25 124)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "a[31..0]" (rect 0 0 37 12)(font "Arial" ))
+		(text "a[31..0]" (rect 21 27 58 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32)(line_width 3))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "b[31..0]" (rect 0 0 37 12)(font "Arial" ))
+		(text "b[31..0]" (rect 21 43 58 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48)(line_width 3))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "aluc[3..0]" (rect 0 0 46 12)(font "Arial" ))
+		(text "aluc[3..0]" (rect 21 59 67 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64)(line_width 3))
+	)
+	(port
+		(pt 144 32)
+		(output)
+		(text "r[31..0]" (rect 0 0 35 12)(font "Arial" ))
+		(text "r[31..0]" (rect 88 27 123 39)(font "Arial" ))
+		(line (pt 144 32)(pt 128 32)(line_width 3))
+	)
+	(port
+		(pt 144 48)
+		(output)
+		(text "zero" (rect 0 0 20 12)(font "Arial" ))
+		(text "zero" (rect 103 43 123 55)(font "Arial" ))
+		(line (pt 144 48)(pt 128 48)(line_width 1))
+	)
+	(port
+		(pt 144 64)
+		(output)
+		(text "carry" (rect 0 0 25 12)(font "Arial" ))
+		(text "carry" (rect 98 59 123 71)(font "Arial" ))
+		(line (pt 144 64)(pt 128 64)(line_width 1))
+	)
+	(port
+		(pt 144 80)
+		(output)
+		(text "negative" (rect 0 0 42 12)(font "Arial" ))
+		(text "negative" (rect 81 75 123 87)(font "Arial" ))
+		(line (pt 144 80)(pt 128 80)(line_width 1))
+	)
+	(port
+		(pt 144 96)
+		(output)
+		(text "overflow" (rect 0 0 42 12)(font "Arial" ))
+		(text "overflow" (rect 81 91 123 103)(font "Arial" ))
+		(line (pt 144 96)(pt 128 96)(line_width 1))
+	)
+	(parameter
+		"Addu"
+		"0000"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"Add"
+		"0010"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"Subu"
+		"0001"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"Sub"
+		"0011"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"And"
+		"0100"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"Or"
+		"0101"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"Xor"
+		"0110"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"Nor"
+		"0111"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"Lui1"
+		"1000"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"Lui2"
+		"1001"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"Slt"
+		"1011"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"Sltu"
+		"1010"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"Sra"
+		"1100"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"Sll"
+		"1110"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"Srl"
+		"1101"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"Slr"
+		"1111"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"bits"
+		"31"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"ENABLE"
+		"1"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"DISABLE"
+		"0"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(drawing
+		(rectangle (rect 16 16 128 112)(line_width 1))
+	)
+	(annotation_block (parameter)(rect 160 -64 260 16))
+)

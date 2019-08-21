@@ -11,7 +11,7 @@ module pcreg(
     D_FF D1 (clk,data_in[1],ena,rst,data_out[1]);
     D_FF D2 (clk,data_in[2],ena,rst,data_out[2]);
     D_FF D3 (clk,data_in[3],ena,rst,data_out[3]);
-    D_FF D4 (clk,data_in[4],ena,rst,data_out[4]);
+    D_FF1 D4 (clk,data_in[4],ena,rst,data_out[4]);
     D_FF D5 (clk,data_in[5],ena,rst,data_out[5]);
     D_FF D6 (clk,data_in[6],ena,rst,data_out[6]);
     D_FF D7 (clk,data_in[7],ena,rst,data_out[7]);
@@ -29,8 +29,8 @@ module pcreg(
     D_FF D19 (clk,data_in[19],ena,rst,data_out[19]);
     D_FF D20 (clk,data_in[20],ena,rst,data_out[20]);
     D_FF D21 (clk,data_in[21],ena,rst,data_out[21]);
-    D_FF1 D22 (clk,data_in[22],ena,rst,data_out[22]);     //以00400000为基地址
-    //D_FF D22 (clk,data_in[22],ena,rst,data_out[22]);        //以00000000为基地址
+    //D_FF1 D22 (clk,data_in[22],ena,rst,data_out[22]);     //以00400000为基地址
+    D_FF D22 (clk,data_in[22],ena,rst,data_out[22]);        //以00000000为基地址
     D_FF D23 (clk,data_in[23],ena,rst,data_out[23]);
     D_FF D24 (clk,data_in[24],ena,rst,data_out[24]);
     D_FF D25 (clk,data_in[25],ena,rst,data_out[25]);

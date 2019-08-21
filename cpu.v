@@ -2,16 +2,18 @@
 module cpu(
     input         clk,
     input         reset,
-    input  [31:0] inst,
-    input  [31:0] rdata,
+    //input  [31:0] inst,
+    //input  [31:0] rdata,
     output [31:0] pc,
     output [31:0] addr,
     output [31:0] wdata,
-    output        IM_R,
-    output        DM_CS,
-    output        DM_R,
-    output        DM_W
-    );
+    output        IM_R
+    //output        DM_CS,
+    //output        DM_R,
+    //output        DM_W
+    //output [31:0] REG1,
+    //output [31:0] REG2   
+     );
     //--------------------------------//控制信号(除有关存储器）
     wire PC_CLK;                     //
     wire PC_ENA;                     //
@@ -39,6 +41,11 @@ module cpu(
     //--------------------------------// 
     wire [31:0] INS;                 //译码后指令
     //--------------------------------//数据通路（除有关存储器）
+    wire [31:0] inst;
+    wire [31:0] rdata;
+    wire DM_R;
+    wire DM_W;
+    
     wire [31:0] D_ALU;               //
     wire [31:0] D_PC;                //
     wire [31:0] D_RF;                //
@@ -49,15 +56,15 @@ module cpu(
     wire [31:0] D_Mux1;              //
     wire [31:0] D_Mux2;              //
     wire [31:0] D_Mux3;              //
-    wire [4:0]  D_Mux4;              //
-    wire [4:0]  D_Mux5;              //
+    //wire [4:0]  D_Mux4;              //
+    //wire [4:0]  D_Mux5;              //
     wire [31:0] D_Mux6;              //
     wire [31:0] D_Mux7;              //
     wire [31:0] D_Mux8;              //
     wire [31:0] D_Mux9;              //
     wire [31:0] D_Mux10;             //
     wire        D_Mux11;             //
-                                      //
+                                     //
     wire [31:0] D_EXT1;              //
     wire [31:0] D_EXT5;              //
     wire [31:0] D_EXT16;             //
@@ -71,19 +78,25 @@ module cpu(
     assign pc = D_PC;
     assign addr = D_ALU;
     assign wdata = D_Rt;
+    assign REG1=D_Rs;
+    assign REG2=D_Rt;
     
     //--------------------------------//指令译码
     instr_dec cpu_ins (inst, INS);
-    operation cpu_opcode (clk,zero,INS,PC_CLK,IM_R,M1,M2,M3,M4,M5,M6,M7,M9,M10,ALUC,RF_W,RF_CLK,DM_W,DM_R,DM_CS,C_EXT16);
+    operation cpu_opcode (clk,zero,INS,PC_CLK,IM_R,M1,M2,M3,/*M4,M5,*/M6,M7,M9,M10,ALUC,RF_W,RF_CLK,DM_W,DM_R,/*DM_CS,*/C_EXT16);
+    
+    
     //--------------------------------//部件
+    INSTMEM insmem (D_PC, inst);
+    DATAMEM datamem (add,wdata,clk,DM_R,DM_W,rdata);
     pcreg   pc_out      (PC_CLK,     reset,      PC_ENA,      D_Mux1,   D_PC);
     alu     cpu_alu     (D_Mux9,     D_Mux10,    ALUC[3:0],   D_ALU,    zero,         carry,        negative, overflow);
     regfile cpu_ref     (RF_CLK,     reset,      RF_W,        overflow, inst[25:21],  inst[20:16],  D_Mux5,   D_Mux6,D_Rs, D_Rt);
     mux     cpu_mux1    (D_Mux3,     D_Mux2,     M1,          D_Mux1);
     mux     cpu_mux2    (D_NPC,      D_ADD,      M2,          D_Mux2);
     mux     cpu_mux3    (D_ii,       D_Rs,       M3,          D_Mux3);
-    mux5    cpu_mux4    (inst[10:6], D_Rs[4:0],  {INS[30],M4},D_Mux4);
-    mux5    cpu_mux5    (inst[15:11],inst[20:16],{INS[30],M5},D_Mux5);
+    //mux5    cpu_mux4    (inst[10:6], D_Rs[4:0],  {INS[30],M4},D_Mux4);
+    //mux5    cpu_mux5    (inst[15:11],inst[20:16],{INS[30],M5},D_Mux5);
     mux     cpu_mux6    (D_Mux7,     D_ADD8,     M6,          D_Mux6);
     mux     cpu_mux7    (D_ALU,     rdata,      M7,          D_Mux7);
     mux     cpu_mux9    (D_EXT5,     D_Rs,       M9,          D_Mux9);
