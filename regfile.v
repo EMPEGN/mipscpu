@@ -8,8 +8,18 @@ module regfile(
     input [4:0] raddr2, //所需读取的寄存器的地址
     input [4:0] waddr, //写寄存器的地址
     input [31:0] wdata, //写寄存器数据，数据在 clk 下降沿时被写入
+    //output [31:0] rdata0,
     output [31:0] rdata1, //raddr1 所对应寄存器的输出数据
-    output [31:0] rdata2 //raddr2 所对应寄存器的输出数据
+    output [31:0] rdata2, //raddr2 所对应寄存器的输出数据
+    output [31:0] rdata3,
+    output [31:0] rdata4,
+    output [31:0] rdata5,
+    output [31:0] rdata6
+    /*output [31:0] regtest1;
+    output [31:0] regtest2;
+    output [31:0] regtest3;
+    output [31:0] regtest4;*/
+    
     );
     wire [31:0] switch;
     wire [31:0] array_reg [31:0];
@@ -56,8 +66,14 @@ module regfile(
     Pcreg Reg30 (clk,rst,switch[29],wdata,array_reg[29]);
     Pcreg Reg31 (clk,rst,switch[30],wdata,array_reg[30]);
     Pcreg Reg32 (clk,rst,switch[31],wdata,array_reg[31]);
-    assign rdata1 = array_reg[raddr1];
-    assign rdata2 = array_reg[raddr2];
+    //assign rdata0 = array_reg[0];
+    assign rdata1 = array_reg[1];
+    assign rdata2 = array_reg[2];
+    assign rdata3 = array_reg[3];
+    assign rdata4 = array_reg[4];
+    assign rdata5 = array_reg[5];
+    assign rdata6 = array_reg[6];
+    //assign regtest1=
 endmodule
  
 module Decoder(

@@ -11,7 +11,7 @@ module pcreg(
     D_FF D1 (clk,data_in[1],ena,rst,data_out[1]);
     D_FF D2 (clk,data_in[2],ena,rst,data_out[2]);
     D_FF D3 (clk,data_in[3],ena,rst,data_out[3]);
-    D_FF1 D4 (clk,data_in[4],ena,rst,data_out[4]);
+    D_FF D4 (clk,data_in[4],ena,rst,data_out[4]);
     D_FF D5 (clk,data_in[5],ena,rst,data_out[5]);
     D_FF D6 (clk,data_in[6],ena,rst,data_out[6]);
     D_FF D7 (clk,data_in[7],ena,rst,data_out[7]);

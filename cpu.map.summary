@@ -1,13 +1,13 @@
-Analysis & Synthesis Status : Successful - Wed Aug 21 08:50:43 2019
+Analysis & Synthesis Status : Successful - Wed Aug 21 18:06:56 2019
 Quartus II Version : 9.0 Build 132 02/25/2009 SJ Full Version
 Revision Name : cpu
 Top-level Entity Name : cpu
 Family : Stratix II
 Logic utilization : N/A
-    Combinational ALUTs : 0
-    Dedicated logic registers : 1
-Total registers : 1
-Total pins : 99
+    Combinational ALUTs : 857
+    Dedicated logic registers : 130
+Total registers : 130
+Total pins : 392
 Total virtual pins : 0
 Total block memory bits : 0
 DSP block 9-bit elements : 0

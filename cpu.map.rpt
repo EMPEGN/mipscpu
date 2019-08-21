@@ -1,5 +1,5 @@
 Analysis & Synthesis report for cpu
-Wed Aug 21 08:50:43 2019
+Wed Aug 21 18:06:56 2019
 Quartus II Version 9.0 Build 132 02/25/2009 SJ Full Version
 
 
@@ -13,20 +13,42 @@ Quartus II Version 9.0 Build 132 02/25/2009 SJ Full Version
   5. Analysis & Synthesis Resource Usage Summary
   6. Analysis & Synthesis Resource Utilization by Entity
   7. Registers Removed During Synthesis
-  8. Removed Registers Triggering Further Register Optimizations
-  9. General Register Statistics
- 10. Inverted Register Statistics
- 11. Parameter Settings for User Entity Instance: alu:cpu_alu
- 12. Port Connectivity Checks: "add:cpu_add"
- 13. Port Connectivity Checks: "extend5:cpu_ext5"
- 14. Port Connectivity Checks: "regfile:cpu_ref|Decoder:dec"
- 15. Port Connectivity Checks: "regfile:cpu_ref"
- 16. Port Connectivity Checks: "alu:cpu_alu"
- 17. Port Connectivity Checks: "pcreg:pc_out"
- 18. Port Connectivity Checks: "DATAMEM:datamem"
- 19. Port Connectivity Checks: "operation:cpu_opcode"
- 20. Analysis & Synthesis Messages
- 21. Analysis & Synthesis Suppressed Messages
+  8. General Register Statistics
+  9. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 10. Parameter Settings for User Entity Instance: alu:cpu_alu
+ 11. Port Connectivity Checks: "add:cpu_add"
+ 12. Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg32"
+ 13. Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg31"
+ 14. Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg30"
+ 15. Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg29"
+ 16. Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg28"
+ 17. Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg27"
+ 18. Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg26"
+ 19. Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg25"
+ 20. Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg24"
+ 21. Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg23"
+ 22. Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg22"
+ 23. Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg21"
+ 24. Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg20"
+ 25. Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg19"
+ 26. Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg18"
+ 27. Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg17"
+ 28. Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg16"
+ 29. Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg15"
+ 30. Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg14"
+ 31. Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg13"
+ 32. Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg12"
+ 33. Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg11"
+ 34. Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg10"
+ 35. Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg9"
+ 36. Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg8"
+ 37. Port Connectivity Checks: "regfile:cpu_ref|Decoder:dec"
+ 38. Port Connectivity Checks: "regfile:cpu_ref"
+ 39. Port Connectivity Checks: "alu:cpu_alu"
+ 40. Port Connectivity Checks: "pcreg:pc_out"
+ 41. Port Connectivity Checks: "DATAMEM:datamem"
+ 42. Analysis & Synthesis Messages
+ 43. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -52,16 +74,16 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                             ;
 +-------------------------------+------------------------------------------+
-; Analysis & Synthesis Status   ; Successful - Wed Aug 21 08:50:43 2019    ;
+; Analysis & Synthesis Status   ; Successful - Wed Aug 21 18:06:56 2019    ;
 ; Quartus II Version            ; 9.0 Build 132 02/25/2009 SJ Full Version ;
 ; Revision Name                 ; cpu                                      ;
 ; Top-level Entity Name         ; cpu                                      ;
 ; Family                        ; Stratix II                               ;
 ; Logic utilization             ; N/A                                      ;
-;     Combinational ALUTs       ; 0                                        ;
-;     Dedicated logic registers ; 1                                        ;
-; Total registers               ; 1                                        ;
-; Total pins                    ; 99                                       ;
+;     Combinational ALUTs       ; 857                                      ;
+;     Dedicated logic registers ; 130                                      ;
+; Total registers               ; 130                                      ;
+; Total pins                    ; 392                                      ;
 ; Total virtual pins            ; 0                                        ;
 ; Total block memory bits       ; 0                                        ;
 ; DSP block 9-bit elements      ; 0                                        ;
@@ -160,6 +182,7 @@ applicable agreement for further details.
 ; II.v                             ; yes             ; User Verilog HDL File  ; D:/github/mipscpu/II.v        ;
 ; instr_dec.v                      ; yes             ; User Verilog HDL File  ; D:/github/mipscpu/instr_dec.v ;
 ; mux.v                            ; yes             ; User Verilog HDL File  ; D:/github/mipscpu/mux.v       ;
+; mux5.v                           ; yes             ; User Verilog HDL File  ; D:/github/mipscpu/mux5.v      ;
 ; npc.v                            ; yes             ; User Verilog HDL File  ; D:/github/mipscpu/npc.v       ;
 ; operation.v                      ; yes             ; User Verilog HDL File  ; D:/github/mipscpu/operation.v ;
 ; pcreg.v                          ; yes             ; User Verilog HDL File  ; D:/github/mipscpu/pcreg.v     ;
@@ -169,178 +192,283 @@ applicable agreement for further details.
 +----------------------------------+-----------------+------------------------+-------------------------------+
 
 
-+--------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary                              ;
-+-----------------------------------------------+--------------------------+
-; Resource                                      ; Usage                    ;
-+-----------------------------------------------+--------------------------+
-; Estimated ALUTs Used                          ; 0                        ;
-; Dedicated logic registers                     ; 1                        ;
-;                                               ;                          ;
-; Estimated ALUTs Unavailable                   ; 0                        ;
-;                                               ;                          ;
-; Total combinational functions                 ; 0                        ;
-; Combinational ALUT usage by number of inputs  ;                          ;
-;     -- 7 input functions                      ; 0                        ;
-;     -- 6 input functions                      ; 0                        ;
-;     -- 5 input functions                      ; 0                        ;
-;     -- 4 input functions                      ; 0                        ;
-;     -- <=3 input functions                    ; 0                        ;
-;                                               ;                          ;
-; Combinational ALUTs by mode                   ;                          ;
-;     -- normal mode                            ; 0                        ;
-;     -- extended LUT mode                      ; 0                        ;
-;     -- arithmetic mode                        ; 0                        ;
-;     -- shared arithmetic mode                 ; 0                        ;
-;                                               ;                          ;
-; Estimated ALUT/register pairs used            ; 1                        ;
-;                                               ;                          ;
-; Total registers                               ; 1                        ;
-;     -- Dedicated logic registers              ; 1                        ;
-;     -- I/O registers                          ; 0                        ;
-;                                               ;                          ;
-; Estimated ALMs:  partially or completely used ; 1                        ;
-;                                               ;                          ;
-; I/O pins                                      ; 99                       ;
-; Maximum fan-out node                          ; pcreg:pc_out|D_FF1:D4|Q1 ;
-; Maximum fan-out                               ; 1                        ;
-; Total fan-out                                 ; 3                        ;
-; Average fan-out                               ; 0.03                     ;
-+-----------------------------------------------+--------------------------+
++----------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                                ;
++-----------------------------------------------+----------------------------+
+; Resource                                      ; Usage                      ;
++-----------------------------------------------+----------------------------+
+; Estimated ALUTs Used                          ; 857                        ;
+; Dedicated logic registers                     ; 130                        ;
+;                                               ;                            ;
+; Estimated ALUTs Unavailable                   ; 77                         ;
+;                                               ;                            ;
+; Total combinational functions                 ; 857                        ;
+; Combinational ALUT usage by number of inputs  ;                            ;
+;     -- 7 input functions                      ; 7                          ;
+;     -- 6 input functions                      ; 104                        ;
+;     -- 5 input functions                      ; 299                        ;
+;     -- 4 input functions                      ; 126                        ;
+;     -- <=3 input functions                    ; 321                        ;
+;                                               ;                            ;
+; Combinational ALUTs by mode                   ;                            ;
+;     -- normal mode                            ; 725                        ;
+;     -- extended LUT mode                      ; 7                          ;
+;     -- arithmetic mode                        ; 125                        ;
+;     -- shared arithmetic mode                 ; 0                          ;
+;                                               ;                            ;
+; Estimated ALUT/register pairs used            ; 957                        ;
+;                                               ;                            ;
+; Total registers                               ; 130                        ;
+;     -- Dedicated logic registers              ; 130                        ;
+;     -- I/O registers                          ; 0                          ;
+;                                               ;                            ;
+; Estimated ALMs:  partially or completely used ; 479                        ;
+;                                               ;                            ;
+; I/O pins                                      ; 392                        ;
+; Maximum fan-out node                          ; operation:cpu_opcode|M10~1 ;
+; Maximum fan-out                               ; 136                        ;
+; Total fan-out                                 ; 4212                       ;
+; Average fan-out                               ; 3.05                       ;
++-----------------------------------------------+----------------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                  ;
-+----------------------------+-------------------+--------------+-------------------+--------------+---------+-----------+-----------+------+--------------+----------------------------+--------------+
-; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Block Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; DSP 36x36 ; Pins ; Virtual Pins ; Full Hierarchy Name        ; Library Name ;
-+----------------------------+-------------------+--------------+-------------------+--------------+---------+-----------+-----------+------+--------------+----------------------------+--------------+
-; |cpu                       ; 0 (0)             ; 1 (0)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 99   ; 0            ; |cpu                       ; work         ;
-;    |pcreg:pc_out|          ; 0 (0)             ; 1 (0)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out          ; work         ;
-;       |D_FF1:D4|           ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF1:D4 ; work         ;
-+----------------------------+-------------------+--------------+-------------------+--------------+---------+-----------+-----------+------+--------------+----------------------------+--------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                ;
++----------------------------+-------------------+--------------+-------------------+--------------+---------+-----------+-----------+------+--------------+------------------------------------------+--------------+
+; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Block Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; DSP 36x36 ; Pins ; Virtual Pins ; Full Hierarchy Name                      ; Library Name ;
++----------------------------+-------------------+--------------+-------------------+--------------+---------+-----------+-----------+------+--------------+------------------------------------------+--------------+
+; |cpu                       ; 857 (0)           ; 130 (0)      ; 0                 ; 0            ; 0       ; 0         ; 0         ; 392  ; 0            ; |cpu                                     ; work         ;
+;    |DATAMEM:datamem|       ; 0 (0)             ; 32 (32)      ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|DATAMEM:datamem                     ; work         ;
+;    |INSTMEM:insmem|        ; 22 (22)           ; 0 (0)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|INSTMEM:insmem                      ; work         ;
+;    |add:cpu_add|           ; 30 (30)           ; 0 (0)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|add:cpu_add                         ; work         ;
+;    |alu:cpu_alu|           ; 598 (598)         ; 0 (0)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|alu:cpu_alu                         ; work         ;
+;    |instr_dec:cpu_ins|     ; 31 (31)           ; 0 (0)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|instr_dec:cpu_ins                   ; work         ;
+;    |mux5:cpu_mux5|         ; 3 (3)             ; 0 (0)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|mux5:cpu_mux5                       ; work         ;
+;    |mux:cpu_mux10|         ; 32 (32)           ; 0 (0)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|mux:cpu_mux10                       ; work         ;
+;    |mux:cpu_mux1|          ; 30 (30)           ; 0 (0)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|mux:cpu_mux1                        ; work         ;
+;    |mux:cpu_mux6|          ; 32 (32)           ; 0 (0)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|mux:cpu_mux6                        ; work         ;
+;    |mux:cpu_mux9|          ; 32 (32)           ; 0 (0)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|mux:cpu_mux9                        ; work         ;
+;    |npc:cpu_npc|           ; 30 (30)           ; 0 (0)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|npc:cpu_npc                         ; work         ;
+;    |operation:cpu_opcode|  ; 10 (10)           ; 0 (0)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|operation:cpu_opcode                ; work         ;
+;    |pcreg:pc_out|          ; 1 (0)             ; 30 (0)       ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out                        ; work         ;
+;       |D_FF:D10|           ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF:D10               ; work         ;
+;       |D_FF:D11|           ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF:D11               ; work         ;
+;       |D_FF:D12|           ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF:D12               ; work         ;
+;       |D_FF:D13|           ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF:D13               ; work         ;
+;       |D_FF:D14|           ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF:D14               ; work         ;
+;       |D_FF:D15|           ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF:D15               ; work         ;
+;       |D_FF:D16|           ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF:D16               ; work         ;
+;       |D_FF:D17|           ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF:D17               ; work         ;
+;       |D_FF:D18|           ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF:D18               ; work         ;
+;       |D_FF:D19|           ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF:D19               ; work         ;
+;       |D_FF:D20|           ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF:D20               ; work         ;
+;       |D_FF:D21|           ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF:D21               ; work         ;
+;       |D_FF:D22|           ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF:D22               ; work         ;
+;       |D_FF:D23|           ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF:D23               ; work         ;
+;       |D_FF:D24|           ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF:D24               ; work         ;
+;       |D_FF:D25|           ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF:D25               ; work         ;
+;       |D_FF:D26|           ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF:D26               ; work         ;
+;       |D_FF:D27|           ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF:D27               ; work         ;
+;       |D_FF:D28|           ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF:D28               ; work         ;
+;       |D_FF:D29|           ; 1 (1)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF:D29               ; work         ;
+;       |D_FF:D2|            ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF:D2                ; work         ;
+;       |D_FF:D30|           ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF:D30               ; work         ;
+;       |D_FF:D31|           ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF:D31               ; work         ;
+;       |D_FF:D3|            ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF:D3                ; work         ;
+;       |D_FF:D4|            ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF:D4                ; work         ;
+;       |D_FF:D5|            ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF:D5                ; work         ;
+;       |D_FF:D6|            ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF:D6                ; work         ;
+;       |D_FF:D7|            ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF:D7                ; work         ;
+;       |D_FF:D8|            ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF:D8                ; work         ;
+;       |D_FF:D9|            ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|pcreg:pc_out|D_FF:D9                ; work         ;
+;    |regfile:cpu_ref|       ; 6 (0)             ; 68 (0)       ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref                     ; work         ;
+;       |Decoder:dec|        ; 6 (6)             ; 0 (0)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Decoder:dec         ; work         ;
+;       |Pcreg:Reg2|         ; 0 (0)             ; 32 (0)       ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2          ; work         ;
+;          |D_FF:d0|         ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d0  ; work         ;
+;          |D_FF:d10|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d10 ; work         ;
+;          |D_FF:d11|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d11 ; work         ;
+;          |D_FF:d12|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d12 ; work         ;
+;          |D_FF:d13|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d13 ; work         ;
+;          |D_FF:d14|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d14 ; work         ;
+;          |D_FF:d15|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d15 ; work         ;
+;          |D_FF:d16|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d16 ; work         ;
+;          |D_FF:d17|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d17 ; work         ;
+;          |D_FF:d18|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d18 ; work         ;
+;          |D_FF:d19|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d19 ; work         ;
+;          |D_FF:d1|         ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d1  ; work         ;
+;          |D_FF:d20|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d20 ; work         ;
+;          |D_FF:d21|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d21 ; work         ;
+;          |D_FF:d22|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d22 ; work         ;
+;          |D_FF:d23|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d23 ; work         ;
+;          |D_FF:d24|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d24 ; work         ;
+;          |D_FF:d25|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d25 ; work         ;
+;          |D_FF:d26|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d26 ; work         ;
+;          |D_FF:d27|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d27 ; work         ;
+;          |D_FF:d28|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d28 ; work         ;
+;          |D_FF:d29|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d29 ; work         ;
+;          |D_FF:d2|         ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d2  ; work         ;
+;          |D_FF:d30|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d30 ; work         ;
+;          |D_FF:d31|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d31 ; work         ;
+;          |D_FF:d3|         ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d3  ; work         ;
+;          |D_FF:d4|         ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d4  ; work         ;
+;          |D_FF:d5|         ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d5  ; work         ;
+;          |D_FF:d6|         ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d6  ; work         ;
+;          |D_FF:d7|         ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d7  ; work         ;
+;          |D_FF:d8|         ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d8  ; work         ;
+;          |D_FF:d9|         ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg2|D_FF:d9  ; work         ;
+;       |Pcreg:Reg3|         ; 0 (0)             ; 32 (0)       ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3          ; work         ;
+;          |D_FF:d0|         ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d0  ; work         ;
+;          |D_FF:d10|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d10 ; work         ;
+;          |D_FF:d11|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d11 ; work         ;
+;          |D_FF:d12|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d12 ; work         ;
+;          |D_FF:d13|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d13 ; work         ;
+;          |D_FF:d14|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d14 ; work         ;
+;          |D_FF:d15|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d15 ; work         ;
+;          |D_FF:d16|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d16 ; work         ;
+;          |D_FF:d17|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d17 ; work         ;
+;          |D_FF:d18|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d18 ; work         ;
+;          |D_FF:d19|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d19 ; work         ;
+;          |D_FF:d1|         ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d1  ; work         ;
+;          |D_FF:d20|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d20 ; work         ;
+;          |D_FF:d21|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d21 ; work         ;
+;          |D_FF:d22|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d22 ; work         ;
+;          |D_FF:d23|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d23 ; work         ;
+;          |D_FF:d24|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d24 ; work         ;
+;          |D_FF:d25|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d25 ; work         ;
+;          |D_FF:d26|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d26 ; work         ;
+;          |D_FF:d27|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d27 ; work         ;
+;          |D_FF:d28|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d28 ; work         ;
+;          |D_FF:d29|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d29 ; work         ;
+;          |D_FF:d2|         ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d2  ; work         ;
+;          |D_FF:d30|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d30 ; work         ;
+;          |D_FF:d31|        ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d31 ; work         ;
+;          |D_FF:d3|         ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d3  ; work         ;
+;          |D_FF:d4|         ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d4  ; work         ;
+;          |D_FF:d5|         ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d5  ; work         ;
+;          |D_FF:d6|         ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d6  ; work         ;
+;          |D_FF:d7|         ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d7  ; work         ;
+;          |D_FF:d8|         ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d8  ; work         ;
+;          |D_FF:d9|         ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg3|D_FF:d9  ; work         ;
+;       |Pcreg:Reg4|         ; 0 (0)             ; 1 (0)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg4          ; work         ;
+;          |D_FF:d0|         ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg4|D_FF:d0  ; work         ;
+;       |Pcreg:Reg5|         ; 0 (0)             ; 1 (0)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg5          ; work         ;
+;          |D_FF:d0|         ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg5|D_FF:d0  ; work         ;
+;       |Pcreg:Reg6|         ; 0 (0)             ; 1 (0)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg6          ; work         ;
+;          |D_FF:d0|         ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg6|D_FF:d0  ; work         ;
+;       |Pcreg:Reg7|         ; 0 (0)             ; 1 (0)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg7          ; work         ;
+;          |D_FF:d0|         ; 0 (0)             ; 1 (1)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |cpu|regfile:cpu_ref|Pcreg:Reg7|D_FF:d0  ; work         ;
++----------------------------+-------------------+--------------+-------------------+--------------+---------+-----------+-----------+------+--------------+------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
-+---------------------------------------------------------------+
-; Registers Removed During Synthesis                            ;
-+------------------------------------------+--------------------+
-; Register name                            ; Reason for Removal ;
-+------------------------------------------+--------------------+
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d31|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d30|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d29|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d28|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d27|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d26|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d25|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d24|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d23|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d22|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d21|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d20|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d19|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d18|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d17|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d16|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d15|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d14|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d13|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d12|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d11|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d10|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d9|Q1   ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d8|Q1   ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d7|Q1   ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d6|Q1   ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d5|Q1   ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d4|Q1   ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d3|Q1   ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d2|Q1   ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d1|Q1   ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg32|D_FF:d0|Q1   ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d31|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d30|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d29|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d28|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d27|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d26|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d25|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d24|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d23|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d22|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d21|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d20|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d19|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d18|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d17|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d16|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d15|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d14|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d13|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d12|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d11|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d10|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d9|Q1   ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d8|Q1   ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d7|Q1   ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d6|Q1   ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d5|Q1   ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d4|Q1   ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d3|Q1   ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d2|Q1   ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d1|Q1   ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg31|D_FF:d0|Q1   ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d31|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d30|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d29|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d28|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d27|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d26|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d25|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d24|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d23|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d22|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d21|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d20|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d19|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d18|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d17|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d16|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d15|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d14|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d13|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d12|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d11|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d10|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d9|Q1   ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d8|Q1   ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d7|Q1   ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d6|Q1   ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d5|Q1   ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d4|Q1   ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d3|Q1   ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d2|Q1   ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d1|Q1   ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg30|D_FF:d0|Q1   ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg29|D_FF:d31|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg29|D_FF:d30|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg29|D_FF:d29|Q1  ; Lost fanout        ;
-; regfile:cpu_ref|Pcreg:Reg29|D_FF:d28|Q1  ; Lost fanout        ;
-; Total Number of Removed Registers = 1023 ;                    ;
-+------------------------------------------+--------------------+
++--------------------------------------------------------------+
+; Registers Removed During Synthesis                           ;
++-----------------------------------------+--------------------+
+; Register name                           ; Reason for Removal ;
++-----------------------------------------+--------------------+
+; DATAMEM:datamem|Ram~32                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~33                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~34                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~35                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~36                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~37                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~38                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~39                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~40                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~41                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~42                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~43                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~44                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~45                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~46                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~47                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~48                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~49                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~50                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~51                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~52                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~53                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~54                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~55                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~56                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~57                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~58                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~59                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~60                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~61                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~62                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~63                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~64                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~65                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~66                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~67                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~68                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~69                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~70                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~71                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~72                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~73                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~74                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~75                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~76                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~77                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~78                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~79                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~80                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~81                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~82                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~83                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~84                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~85                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~86                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~87                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~88                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~89                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~90                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~91                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~92                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~93                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~94                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~95                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~96                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~97                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~98                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~99                  ; Lost fanout        ;
+; DATAMEM:datamem|Ram~100                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~101                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~102                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~103                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~104                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~105                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~106                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~107                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~108                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~109                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~110                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~111                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~112                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~113                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~114                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~115                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~116                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~117                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~118                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~119                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~120                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~121                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~122                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~123                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~124                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~125                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~126                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~127                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~128                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~129                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~130                 ; Lost fanout        ;
+; DATAMEM:datamem|Ram~131                 ; Lost fanout        ;
+; Total Number of Removed Registers = 994 ;                    ;
++-----------------------------------------+--------------------+
 * Table truncated at 100 items. To change the number of removed registers reported, set the "Number of Removed Registers Reported" option under Assignments->Settings->Analysis and Synthesis Settings->More Settings
-
-
-+-----------------------------------------------------------------------------------------------+
-; Removed Registers Triggering Further Register Optimizations                                   ;
-+--------------------------+---------------------------+----------------------------------------+
-; Register name            ; Reason for Removal        ; Registers Removed due to This Register ;
-+--------------------------+---------------------------+----------------------------------------+
-; pcreg:pc_out|D_FF:D31|Q1 ; Stuck at GND              ; pcreg:pc_out|D_FF:D29|Q1               ;
-;                          ; due to stuck port data_in ;                                        ;
-; pcreg:pc_out|D_FF:D30|Q1 ; Stuck at GND              ; pcreg:pc_out|D_FF:D28|Q1               ;
-;                          ; due to stuck port data_in ;                                        ;
-+--------------------------+---------------------------+----------------------------------------+
 
 
 +------------------------------------------------------+
@@ -348,24 +476,42 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 1     ;
+; Total registers                              ; 130   ;
 ; Number of registers using Synchronous Clear  ; 0     ;
 ; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 1     ;
+; Number of registers using Asynchronous Clear ; 98    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 0     ;
+; Number of registers using Clock Enable       ; 100   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
 
-+--------------------------------------------------+
-; Inverted Register Statistics                     ;
-+----------------------------------------+---------+
-; Inverted Register                      ; Fan out ;
-+----------------------------------------+---------+
-; pcreg:pc_out|D_FF1:D4|Q1               ; 1       ;
-; Total number of inverted registers = 1 ;         ;
-+----------------------------------------+---------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                            ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                  ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------+
+; 3:1                ; 2 bits    ; 4 ALUTs       ; 2 ALUTs              ; 2 ALUTs                ; Yes        ; |cpu|pcreg:pc_out|D_FF:D1|Q1                ;
+; 4:1                ; 2 bits    ; 4 ALUTs       ; 4 ALUTs              ; 0 ALUTs                ; Yes        ; |cpu|pcreg:pc_out|D_FF:D30|Q1               ;
+; 4:1                ; 28 bits   ; 56 ALUTs      ; 56 ALUTs             ; 0 ALUTs                ; Yes        ; |cpu|pcreg:pc_out|D_FF:D29|Q1               ;
+; 3:1                ; 4 bits    ; 8 ALUTs       ; 8 ALUTs              ; 0 ALUTs                ; No         ; |cpu|alu:cpu_alu|ShiftLeft0                 ;
+; 3:1                ; 4 bits    ; 8 ALUTs       ; 8 ALUTs              ; 0 ALUTs                ; No         ; |cpu|alu:cpu_alu|ShiftLeft0                 ;
+; 4:1                ; 5 bits    ; 10 ALUTs      ; 10 ALUTs             ; 0 ALUTs                ; No         ; |cpu|mux5:cpu_mux5|Mux2                     ;
+; 3:1                ; 4 bits    ; 8 ALUTs       ; 8 ALUTs              ; 0 ALUTs                ; No         ; |cpu|alu:cpu_alu|ShiftRight1                ;
+; 3:1                ; 4 bits    ; 8 ALUTs       ; 8 ALUTs              ; 0 ALUTs                ; No         ; |cpu|alu:cpu_alu|ShiftRight0                ;
+; 3:1                ; 3 bits    ; 6 ALUTs       ; 6 ALUTs              ; 0 ALUTs                ; No         ; |cpu|regfile:cpu_ref|Decoder:dec|ShiftLeft0 ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 64 ALUTs             ; 0 ALUTs                ; No         ; |cpu|mux:cpu_mux6|z[2]                      ;
+; 3:1                ; 3 bits    ; 6 ALUTs       ; 6 ALUTs              ; 0 ALUTs                ; No         ; |cpu|regfile:cpu_ref|Decoder:dec|ShiftLeft0 ;
+; 5:1                ; 5 bits    ; 15 ALUTs      ; 10 ALUTs             ; 5 ALUTs                ; No         ; |cpu|mux:cpu_mux9|z[4]                      ;
+; 4:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; No         ; |cpu|alu:cpu_alu|Add0                       ;
+; 4:1                ; 15 bits   ; 30 ALUTs      ; 15 ALUTs             ; 15 ALUTs               ; No         ; |cpu|alu:cpu_alu|Add0                       ;
+; 4:1                ; 15 bits   ; 30 ALUTs      ; 15 ALUTs             ; 15 ALUTs               ; No         ; |cpu|alu:cpu_alu|Add0                       ;
+; 25:1               ; 6 bits    ; 96 ALUTs      ; 66 ALUTs             ; 30 ALUTs               ; No         ; |cpu|alu:cpu_alu|Mux24                      ;
+; 26:1               ; 4 bits    ; 68 ALUTs      ; 48 ALUTs             ; 20 ALUTs               ; No         ; |cpu|alu:cpu_alu|Mux28                      ;
+; 27:1               ; 3 bits    ; 54 ALUTs      ; 36 ALUTs             ; 18 ALUTs               ; No         ; |cpu|alu:cpu_alu|Mux29                      ;
+; 22:1               ; 12 bits   ; 168 ALUTs     ; 144 ALUTs            ; 24 ALUTs               ; No         ; |cpu|alu:cpu_alu|Mux12                      ;
+; 24:1               ; 2 bits    ; 32 ALUTs      ; 26 ALUTs             ; 6 ALUTs                ; No         ; |cpu|alu:cpu_alu|Mux3                       ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------+
 
 
 +----------------------------------------------------------+
@@ -405,13 +551,229 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------+--------+----------+-------------------------------------------------------------------------------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "extend5:cpu_ext5"                                                                                                                        ;
-+------+-------+----------+-------------------------------------------------------------------------------------------------------------------------------------------+
-; Port ; Type  ; Severity ; Details                                                                                                                                   ;
-+------+-------+----------+-------------------------------------------------------------------------------------------------------------------------------------------+
-; a    ; Input ; Warning  ; Input port expression (1 bits) is smaller than the input port (5 bits) it drives.  Extra input bit(s) "a[4..1]" will be connected to GND. ;
-+------+-------+----------+-------------------------------------------------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg32"                                                            ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; data_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg31"                                                            ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; data_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg30"                                                            ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; data_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg29"                                                            ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; data_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg28"                                                            ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; data_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg27"                                                            ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; data_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg26"                                                            ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; data_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg25"                                                            ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; data_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg24"                                                            ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; data_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg23"                                                            ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; data_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg22"                                                            ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; data_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg21"                                                            ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; data_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg20"                                                            ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; data_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg19"                                                            ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; data_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg18"                                                            ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; data_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg17"                                                            ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; data_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg16"                                                            ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; data_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg15"                                                            ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; data_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg14"                                                            ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; data_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg13"                                                            ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; data_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg12"                                                            ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; data_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg11"                                                            ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; data_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg10"                                                            ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; data_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg9"                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; data_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "regfile:cpu_ref|Pcreg:Reg8"                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; data_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
 
 
 +--------------------------------------------------------------------------------------------------------------------+
@@ -423,13 +785,16 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------+--------+----------+-------------------------------------------------------------------------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "regfile:cpu_ref"                                                                                                                              ;
-+-------+-------+----------+-----------------------------------------------------------------------------------------------------------------------------------------------+
-; Port  ; Type  ; Severity ; Details                                                                                                                                       ;
-+-------+-------+----------+-----------------------------------------------------------------------------------------------------------------------------------------------+
-; waddr ; Input ; Warning  ; Input port expression (1 bits) is smaller than the input port (5 bits) it drives.  Extra input bit(s) "waddr[4..1]" will be connected to GND. ;
-+-------+-------+----------+-----------------------------------------------------------------------------------------------------------------------------------------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "regfile:cpu_ref"                                                                                                              ;
++--------+--------+----------+-----------------------------------------------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                                                                     ;
++--------+--------+----------+-----------------------------------------------------------------------------------------------------------------------------+
+; rdata3 ; Output ; Warning  ; Output or bidir port (32 bits) is wider than the port expression (1 bits) it drives; bit(s) "rdata3[31..1]" have no fanouts ;
+; rdata4 ; Output ; Warning  ; Output or bidir port (32 bits) is wider than the port expression (1 bits) it drives; bit(s) "rdata4[31..1]" have no fanouts ;
+; rdata5 ; Output ; Warning  ; Output or bidir port (32 bits) is wider than the port expression (1 bits) it drives; bit(s) "rdata5[31..1]" have no fanouts ;
+; rdata6 ; Output ; Warning  ; Output or bidir port (32 bits) is wider than the port expression (1 bits) it drives; bit(s) "rdata6[31..1]" have no fanouts ;
++--------+--------+----------+-----------------------------------------------------------------------------------------------------------------------------+
 
 
 +--------------------------------------------------------------------------------------------------------------------+
@@ -460,25 +825,13 @@ Note: In order to hide this table in the UI and the text report file, please set
 +------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "operation:cpu_opcode"                                                                                                                                                    ;
-+---------+--------+----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port    ; Type   ; Severity ; Details                                                                                                                                                               ;
-+---------+--------+----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; M9      ; Output ; Warning  ; Output or bidir port (1 bits) is smaller than the port expression (4 bits) it drives.  The 3 most-significant bit(s) in the port expression will be connected to GND. ;
-; ALUC    ; Output ; Warning  ; Output or bidir port (4 bits) is wider than the port expression (1 bits) it drives; bit(s) "ALUC[3..1]" have no fanouts                                               ;
-; DM_r    ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed.                                                              ;
-; C_EXT16 ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed.                                                              ;
-+---------+--------+----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-
 +-------------------------------+
 ; Analysis & Synthesis Messages ;
 +-------------------------------+
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 9.0 Build 132 02/25/2009 SJ Full Version
-    Info: Processing started: Wed Aug 21 08:50:38 2019
+    Info: Processing started: Wed Aug 21 18:06:40 2019
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off cpu -c cpu
 Info: Found 1 design units, including 1 entities, in source file add.v
     Info: Found entity 1: add
@@ -519,67 +872,38 @@ Info: Found 1 design units, including 1 entities, in source file INSTMEM.v
     Info: Found entity 1: INSTMEM
 Info: Found 1 design units, including 1 entities, in source file DATAMEM.v
     Info: Found entity 1: DATAMEM
-Warning (10236): Verilog HDL Implicit Net warning at cpu.v(81): created implicit net for "REG1"
-Warning (10236): Verilog HDL Implicit Net warning at cpu.v(82): created implicit net for "REG2"
-Warning (10236): Verilog HDL Implicit Net warning at cpu.v(91): created implicit net for "add"
-Warning (10236): Verilog HDL Implicit Net warning at cpu.v(94): created implicit net for "D_Mux5"
-Warning (10236): Verilog HDL Implicit Net warning at cpu.v(104): created implicit net for "D_Mux4"
+Warning (10236): Verilog HDL Implicit Net warning at cpu.v(93): created implicit net for "RDADDRE"
+Warning (10236): Verilog HDL Implicit Net warning at cpu.v(111): created implicit net for "add"
+Warning (10236): Verilog HDL Implicit Net warning at cpu.v(114): created implicit net for "D_Reg3"
+Warning (10236): Verilog HDL Implicit Net warning at cpu.v(114): created implicit net for "D_Reg4"
+Warning (10236): Verilog HDL Implicit Net warning at cpu.v(114): created implicit net for "D_Reg5"
+Warning (10236): Verilog HDL Implicit Net warning at cpu.v(114): created implicit net for "D_Reg6"
 Info: Elaborating entity "cpu" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at cpu.v(81): object "REG1" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at cpu.v(82): object "REG2" assigned a value but never read
-Warning (10230): Verilog HDL assignment warning at cpu.v(81): truncated value with size 32 to match size of target (1)
-Warning (10230): Verilog HDL assignment warning at cpu.v(82): truncated value with size 32 to match size of target (1)
+Warning (10036): Verilog HDL or VHDL warning at cpu.v(93): object "RDADDRE" assigned a value but never read
+Warning (10230): Verilog HDL assignment warning at cpu.v(93): truncated value with size 5 to match size of target (1)
+Warning (10034): Output port "RAADDRE[4]" at cpu.v(19) has no driver
+Warning (10034): Output port "RAADDRE[3]" at cpu.v(19) has no driver
+Warning (10034): Output port "RAADDRE[2]" at cpu.v(19) has no driver
+Warning (10034): Output port "RAADDRE[1]" at cpu.v(19) has no driver
+Warning (10034): Output port "RAADDRE[0]" at cpu.v(19) has no driver
 Info: Elaborating entity "instr_dec" for hierarchy "instr_dec:cpu_ins"
 Info: Elaborating entity "operation" for hierarchy "operation:cpu_opcode"
-Warning (10034): Output port "M4" at operation.v(11) has no driver
-Warning (10034): Output port "M5" at operation.v(12) has no driver
 Info: Elaborating entity "INSTMEM" for hierarchy "INSTMEM:insmem"
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(6): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(7): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(8): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(9): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(10): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(11): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(12): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(13): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(14): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(15): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(16): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(17): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(18): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(19): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(20): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(21): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(22): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(23): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(24): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(25): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(26): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(27): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(28): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(29): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(30): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(31): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(32): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(33): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(34): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(35): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(36): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at INSTMEM.v(37): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at INSTMEM.v(39): truncated value with size 33 to match size of target (32)
 Info: Elaborating entity "DATAMEM" for hierarchy "DATAMEM:datamem"
 Info: Elaborating entity "pcreg" for hierarchy "pcreg:pc_out"
 Info: Elaborating entity "D_FF" for hierarchy "pcreg:pc_out|D_FF:D0"
-Info: Elaborating entity "D_FF1" for hierarchy "pcreg:pc_out|D_FF1:D4"
 Info: Elaborating entity "alu" for hierarchy "alu:cpu_alu"
 Warning (10240): Verilog HDL Always Construct warning at alu.v(37): inferring latch(es) for variable "sresult", which holds its previous value in one or more paths through the always construct
 Warning (10230): Verilog HDL assignment warning at alu.v(89): truncated value with size 32 to match size of target (1)
 Info (10041): Inferred latch for "sresult[32]" at alu.v(37)
 Info (10041): Inferred latch for "sresult[33]" at alu.v(37)
 Info: Elaborating entity "regfile" for hierarchy "regfile:cpu_ref"
-Warning (10059): Verilog HDL Case Statement warning at regfile.v(20): case item expression never matches the case expression because it contains an 'x' or 'z' value
+Warning (10059): Verilog HDL Case Statement warning at regfile.v(30): case item expression never matches the case expression because it contains an 'x' or 'z' value
 Info: Elaborating entity "Decoder" for hierarchy "regfile:cpu_ref|Decoder:dec"
 Info: Elaborating entity "Pcreg" for hierarchy "regfile:cpu_ref|Pcreg:Reg2"
 Info: Elaborating entity "mux" for hierarchy "mux:cpu_mux1"
+Info: Elaborating entity "mux5" for hierarchy "mux5:cpu_mux4"
 Info: Elaborating entity "extend5" for hierarchy "extend5:cpu_ext5"
 Info: Elaborating entity "extend16" for hierarchy "extend16:cpu_ext16"
 Info: Elaborating entity "extend18" for hierarchy "extend18:cpu_ext18"
@@ -588,225 +912,266 @@ Warning (10230): Verilog HDL assignment warning at add.v(9): truncated value wit
 Info: Elaborating entity "add8" for hierarchy "add8:cpu_add8"
 Info: Elaborating entity "npc" for hierarchy "npc:cpu_npc"
 Info: Elaborating entity "II" for hierarchy "II:cpu_ii"
-Warning: Net is missing source, defaulting to GND
-    Warning (12110): Net "ALUC[3]" is missing source, defaulting to GND
-    Warning (12110): Net "ALUC[2]" is missing source, defaulting to GND
-    Warning (12110): Net "ALUC[1]" is missing source, defaulting to GND
-Warning: Net is missing source, defaulting to GND
-    Warning (12110): Net "ALUC[3]" is missing source, defaulting to GND
-    Warning (12110): Net "ALUC[2]" is missing source, defaulting to GND
-    Warning (12110): Net "ALUC[1]" is missing source, defaulting to GND
-Warning: 4 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Info: Found 1 instances of uninferred RAM logic
+    Info: RAM logic "DATAMEM:datamem|Ram" is uninferred due to asynchronous read logic
+Warning: 2 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Warning: Output pins are stuck at VCC or GND
-    Warning (13410): Pin "pc[0]" is stuck at GND
-    Warning (13410): Pin "pc[1]" is stuck at GND
-    Warning (13410): Pin "pc[2]" is stuck at GND
-    Warning (13410): Pin "pc[3]" is stuck at GND
-    Warning (13410): Pin "pc[5]" is stuck at GND
-    Warning (13410): Pin "pc[6]" is stuck at GND
-    Warning (13410): Pin "pc[7]" is stuck at GND
-    Warning (13410): Pin "pc[8]" is stuck at GND
-    Warning (13410): Pin "pc[9]" is stuck at GND
-    Warning (13410): Pin "pc[10]" is stuck at GND
-    Warning (13410): Pin "pc[11]" is stuck at GND
-    Warning (13410): Pin "pc[12]" is stuck at GND
-    Warning (13410): Pin "pc[13]" is stuck at GND
-    Warning (13410): Pin "pc[14]" is stuck at GND
-    Warning (13410): Pin "pc[15]" is stuck at GND
-    Warning (13410): Pin "pc[16]" is stuck at GND
-    Warning (13410): Pin "pc[17]" is stuck at GND
-    Warning (13410): Pin "pc[18]" is stuck at GND
-    Warning (13410): Pin "pc[19]" is stuck at GND
-    Warning (13410): Pin "pc[20]" is stuck at GND
-    Warning (13410): Pin "pc[21]" is stuck at GND
-    Warning (13410): Pin "pc[22]" is stuck at GND
-    Warning (13410): Pin "pc[23]" is stuck at GND
-    Warning (13410): Pin "pc[24]" is stuck at GND
-    Warning (13410): Pin "pc[25]" is stuck at GND
-    Warning (13410): Pin "pc[26]" is stuck at GND
-    Warning (13410): Pin "pc[27]" is stuck at GND
-    Warning (13410): Pin "pc[28]" is stuck at GND
-    Warning (13410): Pin "pc[29]" is stuck at GND
-    Warning (13410): Pin "pc[30]" is stuck at GND
-    Warning (13410): Pin "pc[31]" is stuck at GND
-    Warning (13410): Pin "addr[0]" is stuck at GND
-    Warning (13410): Pin "addr[1]" is stuck at GND
-    Warning (13410): Pin "addr[2]" is stuck at GND
-    Warning (13410): Pin "addr[3]" is stuck at GND
-    Warning (13410): Pin "addr[4]" is stuck at GND
-    Warning (13410): Pin "addr[5]" is stuck at GND
-    Warning (13410): Pin "addr[6]" is stuck at GND
-    Warning (13410): Pin "addr[7]" is stuck at GND
-    Warning (13410): Pin "addr[8]" is stuck at GND
-    Warning (13410): Pin "addr[9]" is stuck at GND
-    Warning (13410): Pin "addr[10]" is stuck at GND
-    Warning (13410): Pin "addr[11]" is stuck at GND
-    Warning (13410): Pin "addr[12]" is stuck at GND
-    Warning (13410): Pin "addr[13]" is stuck at GND
-    Warning (13410): Pin "addr[14]" is stuck at GND
-    Warning (13410): Pin "addr[15]" is stuck at GND
-    Warning (13410): Pin "addr[16]" is stuck at GND
-    Warning (13410): Pin "addr[17]" is stuck at GND
-    Warning (13410): Pin "addr[18]" is stuck at GND
-    Warning (13410): Pin "addr[19]" is stuck at GND
-    Warning (13410): Pin "addr[20]" is stuck at GND
-    Warning (13410): Pin "addr[21]" is stuck at GND
-    Warning (13410): Pin "addr[22]" is stuck at GND
-    Warning (13410): Pin "addr[23]" is stuck at GND
-    Warning (13410): Pin "addr[24]" is stuck at GND
-    Warning (13410): Pin "addr[25]" is stuck at GND
-    Warning (13410): Pin "addr[26]" is stuck at GND
-    Warning (13410): Pin "addr[27]" is stuck at GND
-    Warning (13410): Pin "addr[28]" is stuck at GND
-    Warning (13410): Pin "addr[29]" is stuck at GND
-    Warning (13410): Pin "addr[30]" is stuck at GND
-    Warning (13410): Pin "addr[31]" is stuck at GND
-    Warning (13410): Pin "wdata[0]" is stuck at GND
-    Warning (13410): Pin "wdata[1]" is stuck at GND
-    Warning (13410): Pin "wdata[2]" is stuck at GND
-    Warning (13410): Pin "wdata[3]" is stuck at GND
-    Warning (13410): Pin "wdata[4]" is stuck at GND
-    Warning (13410): Pin "wdata[5]" is stuck at GND
-    Warning (13410): Pin "wdata[6]" is stuck at GND
-    Warning (13410): Pin "wdata[7]" is stuck at GND
-    Warning (13410): Pin "wdata[8]" is stuck at GND
-    Warning (13410): Pin "wdata[9]" is stuck at GND
-    Warning (13410): Pin "wdata[10]" is stuck at GND
-    Warning (13410): Pin "wdata[11]" is stuck at GND
-    Warning (13410): Pin "wdata[12]" is stuck at GND
-    Warning (13410): Pin "wdata[13]" is stuck at GND
-    Warning (13410): Pin "wdata[14]" is stuck at GND
-    Warning (13410): Pin "wdata[15]" is stuck at GND
-    Warning (13410): Pin "wdata[16]" is stuck at GND
-    Warning (13410): Pin "wdata[17]" is stuck at GND
-    Warning (13410): Pin "wdata[18]" is stuck at GND
-    Warning (13410): Pin "wdata[19]" is stuck at GND
-    Warning (13410): Pin "wdata[20]" is stuck at GND
-    Warning (13410): Pin "wdata[21]" is stuck at GND
-    Warning (13410): Pin "wdata[22]" is stuck at GND
-    Warning (13410): Pin "wdata[23]" is stuck at GND
-    Warning (13410): Pin "wdata[24]" is stuck at GND
-    Warning (13410): Pin "wdata[25]" is stuck at GND
-    Warning (13410): Pin "wdata[26]" is stuck at GND
-    Warning (13410): Pin "wdata[27]" is stuck at GND
-    Warning (13410): Pin "wdata[28]" is stuck at GND
-    Warning (13410): Pin "wdata[29]" is stuck at GND
-    Warning (13410): Pin "wdata[30]" is stuck at GND
-    Warning (13410): Pin "wdata[31]" is stuck at GND
     Warning (13410): Pin "IM_R" is stuck at VCC
-Info: Registers with preset signals will power-up high
+    Warning (13410): Pin "insout[4]" is stuck at GND
+    Warning (13410): Pin "insout[6]" is stuck at GND
+    Warning (13410): Pin "insout[7]" is stuck at GND
+    Warning (13410): Pin "insout[8]" is stuck at GND
+    Warning (13410): Pin "insout[9]" is stuck at GND
+    Warning (13410): Pin "insout[10]" is stuck at GND
+    Warning (13410): Pin "insout[14]" is stuck at GND
+    Warning (13410): Pin "insout[15]" is stuck at GND
+    Warning (13410): Pin "insout[19]" is stuck at GND
+    Warning (13410): Pin "insout[20]" is stuck at GND
+    Warning (13410): Pin "insout[23]" is stuck at GND
+    Warning (13410): Pin "insout[25]" is stuck at GND
+    Warning (13410): Pin "insout[30]" is stuck at GND
+    Warning (13410): Pin "INSOUT[31]" is stuck at GND
+    Warning (13410): Pin "RAADDRE[0]" is stuck at GND
+    Warning (13410): Pin "RAADDRE[1]" is stuck at GND
+    Warning (13410): Pin "RAADDRE[2]" is stuck at GND
+    Warning (13410): Pin "RAADDRE[3]" is stuck at GND
+    Warning (13410): Pin "RAADDRE[4]" is stuck at GND
+    Warning (13410): Pin "REG3[1]" is stuck at GND
+    Warning (13410): Pin "REG3[2]" is stuck at GND
+    Warning (13410): Pin "REG3[3]" is stuck at GND
+    Warning (13410): Pin "REG3[4]" is stuck at GND
+    Warning (13410): Pin "REG3[5]" is stuck at GND
+    Warning (13410): Pin "REG3[6]" is stuck at GND
+    Warning (13410): Pin "REG3[7]" is stuck at GND
+    Warning (13410): Pin "REG3[8]" is stuck at GND
+    Warning (13410): Pin "REG3[9]" is stuck at GND
+    Warning (13410): Pin "REG3[10]" is stuck at GND
+    Warning (13410): Pin "REG3[11]" is stuck at GND
+    Warning (13410): Pin "REG3[12]" is stuck at GND
+    Warning (13410): Pin "REG3[13]" is stuck at GND
+    Warning (13410): Pin "REG3[14]" is stuck at GND
+    Warning (13410): Pin "REG3[15]" is stuck at GND
+    Warning (13410): Pin "REG3[16]" is stuck at GND
+    Warning (13410): Pin "REG3[17]" is stuck at GND
+    Warning (13410): Pin "REG3[18]" is stuck at GND
+    Warning (13410): Pin "REG3[19]" is stuck at GND
+    Warning (13410): Pin "REG3[20]" is stuck at GND
+    Warning (13410): Pin "REG3[21]" is stuck at GND
+    Warning (13410): Pin "REG3[22]" is stuck at GND
+    Warning (13410): Pin "REG3[23]" is stuck at GND
+    Warning (13410): Pin "REG3[24]" is stuck at GND
+    Warning (13410): Pin "REG3[25]" is stuck at GND
+    Warning (13410): Pin "REG3[26]" is stuck at GND
+    Warning (13410): Pin "REG3[27]" is stuck at GND
+    Warning (13410): Pin "REG3[28]" is stuck at GND
+    Warning (13410): Pin "REG3[29]" is stuck at GND
+    Warning (13410): Pin "REG3[30]" is stuck at GND
+    Warning (13410): Pin "REG3[31]" is stuck at GND
+    Warning (13410): Pin "REG4[1]" is stuck at GND
+    Warning (13410): Pin "REG4[2]" is stuck at GND
+    Warning (13410): Pin "REG4[3]" is stuck at GND
+    Warning (13410): Pin "REG4[4]" is stuck at GND
+    Warning (13410): Pin "REG4[5]" is stuck at GND
+    Warning (13410): Pin "REG4[6]" is stuck at GND
+    Warning (13410): Pin "REG4[7]" is stuck at GND
+    Warning (13410): Pin "REG4[8]" is stuck at GND
+    Warning (13410): Pin "REG4[9]" is stuck at GND
+    Warning (13410): Pin "REG4[10]" is stuck at GND
+    Warning (13410): Pin "REG4[11]" is stuck at GND
+    Warning (13410): Pin "REG4[12]" is stuck at GND
+    Warning (13410): Pin "REG4[13]" is stuck at GND
+    Warning (13410): Pin "REG4[14]" is stuck at GND
+    Warning (13410): Pin "REG4[15]" is stuck at GND
+    Warning (13410): Pin "REG4[16]" is stuck at GND
+    Warning (13410): Pin "REG4[17]" is stuck at GND
+    Warning (13410): Pin "REG4[18]" is stuck at GND
+    Warning (13410): Pin "REG4[19]" is stuck at GND
+    Warning (13410): Pin "REG4[20]" is stuck at GND
+    Warning (13410): Pin "REG4[21]" is stuck at GND
+    Warning (13410): Pin "REG4[22]" is stuck at GND
+    Warning (13410): Pin "REG4[23]" is stuck at GND
+    Warning (13410): Pin "REG4[24]" is stuck at GND
+    Warning (13410): Pin "REG4[25]" is stuck at GND
+    Warning (13410): Pin "REG4[26]" is stuck at GND
+    Warning (13410): Pin "REG4[27]" is stuck at GND
+    Warning (13410): Pin "REG4[28]" is stuck at GND
+    Warning (13410): Pin "REG4[29]" is stuck at GND
+    Warning (13410): Pin "REG4[30]" is stuck at GND
+    Warning (13410): Pin "REG4[31]" is stuck at GND
+    Warning (13410): Pin "REG5[1]" is stuck at GND
+    Warning (13410): Pin "REG5[2]" is stuck at GND
+    Warning (13410): Pin "REG5[3]" is stuck at GND
+    Warning (13410): Pin "REG5[4]" is stuck at GND
+    Warning (13410): Pin "REG5[5]" is stuck at GND
+    Warning (13410): Pin "REG5[6]" is stuck at GND
+    Warning (13410): Pin "REG5[7]" is stuck at GND
+    Warning (13410): Pin "REG5[8]" is stuck at GND
+    Warning (13410): Pin "REG5[9]" is stuck at GND
+    Warning (13410): Pin "REG5[10]" is stuck at GND
+    Warning (13410): Pin "REG5[11]" is stuck at GND
+    Warning (13410): Pin "REG5[12]" is stuck at GND
+    Warning (13410): Pin "REG5[13]" is stuck at GND
+    Warning (13410): Pin "REG5[14]" is stuck at GND
+    Warning (13410): Pin "REG5[15]" is stuck at GND
+    Warning (13410): Pin "REG5[16]" is stuck at GND
+    Warning (13410): Pin "REG5[17]" is stuck at GND
+    Warning (13410): Pin "REG5[18]" is stuck at GND
+    Warning (13410): Pin "REG5[19]" is stuck at GND
+    Warning (13410): Pin "REG5[20]" is stuck at GND
+    Warning (13410): Pin "REG5[21]" is stuck at GND
+    Warning (13410): Pin "REG5[22]" is stuck at GND
+    Warning (13410): Pin "REG5[23]" is stuck at GND
+    Warning (13410): Pin "REG5[24]" is stuck at GND
+    Warning (13410): Pin "REG5[25]" is stuck at GND
+    Warning (13410): Pin "REG5[26]" is stuck at GND
+    Warning (13410): Pin "REG5[27]" is stuck at GND
+    Warning (13410): Pin "REG5[28]" is stuck at GND
+    Warning (13410): Pin "REG5[29]" is stuck at GND
+    Warning (13410): Pin "REG5[30]" is stuck at GND
+    Warning (13410): Pin "REG5[31]" is stuck at GND
+    Warning (13410): Pin "REG6[1]" is stuck at GND
+    Warning (13410): Pin "REG6[2]" is stuck at GND
+    Warning (13410): Pin "REG6[3]" is stuck at GND
+    Warning (13410): Pin "REG6[4]" is stuck at GND
+    Warning (13410): Pin "REG6[5]" is stuck at GND
+    Warning (13410): Pin "REG6[6]" is stuck at GND
+    Warning (13410): Pin "REG6[7]" is stuck at GND
+    Warning (13410): Pin "REG6[8]" is stuck at GND
+    Warning (13410): Pin "REG6[9]" is stuck at GND
+    Warning (13410): Pin "REG6[10]" is stuck at GND
+    Warning (13410): Pin "REG6[11]" is stuck at GND
+    Warning (13410): Pin "REG6[12]" is stuck at GND
+    Warning (13410): Pin "REG6[13]" is stuck at GND
+    Warning (13410): Pin "REG6[14]" is stuck at GND
+    Warning (13410): Pin "REG6[15]" is stuck at GND
+    Warning (13410): Pin "REG6[16]" is stuck at GND
+    Warning (13410): Pin "REG6[17]" is stuck at GND
+    Warning (13410): Pin "REG6[18]" is stuck at GND
+    Warning (13410): Pin "REG6[19]" is stuck at GND
+    Warning (13410): Pin "REG6[20]" is stuck at GND
+    Warning (13410): Pin "REG6[21]" is stuck at GND
+    Warning (13410): Pin "REG6[22]" is stuck at GND
+    Warning (13410): Pin "REG6[23]" is stuck at GND
+    Warning (13410): Pin "REG6[24]" is stuck at GND
+    Warning (13410): Pin "REG6[25]" is stuck at GND
+    Warning (13410): Pin "REG6[26]" is stuck at GND
+    Warning (13410): Pin "REG6[27]" is stuck at GND
+    Warning (13410): Pin "REG6[28]" is stuck at GND
+    Warning (13410): Pin "REG6[29]" is stuck at GND
+    Warning (13410): Pin "REG6[30]" is stuck at GND
+    Warning (13410): Pin "REG6[31]" is stuck at GND
 Info: 992 registers lost all their fanouts during netlist optimizations. The first 100 are displayed below.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d31|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d30|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d29|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d28|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d27|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d26|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d25|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d24|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d23|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d22|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d21|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d20|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d19|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d18|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d17|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d16|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d15|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d14|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d13|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d12|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d11|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d10|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d9|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d8|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d7|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d6|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d5|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d4|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d3|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d2|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d1|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg32|D_FF:d0|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d31|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d30|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d29|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d28|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d27|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d26|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d25|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d24|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d23|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d22|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d21|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d20|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d19|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d18|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d17|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d16|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d15|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d14|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d13|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d12|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d11|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d10|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d9|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d8|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d7|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d6|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d5|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d4|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d3|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d2|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d1|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg31|D_FF:d0|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d31|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d30|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d29|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d28|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d27|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d26|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d25|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d24|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d23|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d22|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d21|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d20|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d19|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d18|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d17|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d16|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d15|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d14|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d13|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d12|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d11|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d10|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d9|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d8|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d7|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d6|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d5|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d4|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d3|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d2|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d1|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg30|D_FF:d0|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg29|D_FF:d31|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg29|D_FF:d30|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg29|D_FF:d29|Q1" lost all its fanouts during netlist optimizations.
-    Info: Register "regfile:cpu_ref|Pcreg:Reg29|D_FF:d28|Q1" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~32" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~33" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~34" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~35" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~36" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~37" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~38" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~39" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~40" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~41" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~42" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~43" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~44" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~45" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~46" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~47" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~48" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~49" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~50" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~51" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~52" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~53" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~54" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~55" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~56" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~57" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~58" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~59" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~60" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~61" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~62" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~63" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~64" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~65" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~66" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~67" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~68" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~69" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~70" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~71" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~72" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~73" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~74" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~75" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~76" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~77" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~78" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~79" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~80" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~81" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~82" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~83" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~84" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~85" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~86" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~87" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~88" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~89" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~90" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~91" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~92" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~93" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~94" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~95" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~96" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~97" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~98" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~99" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~100" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~101" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~102" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~103" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~104" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~105" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~106" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~107" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~108" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~109" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~110" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~111" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~112" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~113" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~114" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~115" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~116" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~117" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~118" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~119" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~120" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~121" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~122" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~123" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~124" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~125" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~126" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~127" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~128" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~129" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~130" lost all its fanouts during netlist optimizations.
+    Info: Register "DATAMEM:datamem|Ram~131" lost all its fanouts during netlist optimizations.
     Info: List truncated at 100 items
 Info: Generated suppressed messages file D:/github/mipscpu/cpu.map.smsg
-Info: Implemented 100 device resources after synthesis - the final resource count might be different
+Info: Implemented 1349 device resources after synthesis - the final resource count might be different
     Info: Implemented 2 input pins
-    Info: Implemented 97 output pins
-    Info: Implemented 1 logic cells
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 154 warnings
-    Info: Peak virtual memory: 239 megabytes
-    Info: Processing ended: Wed Aug 21 08:50:43 2019
-    Info: Elapsed time: 00:00:05
-    Info: Total CPU time (on all processors): 00:00:03
+    Info: Implemented 390 output pins
+    Info: Implemented 957 logic cells
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 165 warnings
+    Info: Peak virtual memory: 247 megabytes
+    Info: Processing ended: Wed Aug 21 18:06:56 2019
+    Info: Elapsed time: 00:00:16
+    Info: Total CPU time (on all processors): 00:00:15
 
 
 +------------------------------------------+
